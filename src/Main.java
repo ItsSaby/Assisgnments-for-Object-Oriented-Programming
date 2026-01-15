@@ -1,5 +1,11 @@
 public class Main {
     public static void main(String[] args) throws java.io.IOException {
+        ProfileDAO dao = new ProfileDAO();
+
+        dao.addProfile("miras", "miras@mail.com");
+        dao.getProfiles();
+        // dao.deleteProfile(1);
+
         java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 
         SocialNetwork sn = new SocialNetwork("QuraqKorpe");
