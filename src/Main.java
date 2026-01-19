@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) throws java.io.IOException {
         ProfileDAO dao = new ProfileDAO();
@@ -32,6 +34,7 @@ public class Main {
             System.out.println("3. Добавить сторис");
             System.out.println("4. Показать профиль");
             System.out.println("5. Выход");
+            System.out.println("6. Админ панель");
             System.out.print("Выберите пункт: ");
 
             String input = reader.readLine();
@@ -94,6 +97,59 @@ public class Main {
                     run = false;
                     System.out.println("Выход...");
                     break;
+
+                case 6:
+                    boolean adminRun = true;
+
+                    while (adminRun) {
+                        System.out.println("\n=== Админ панель ===");
+                        System.out.println("1. Добавить профиль (DB)");
+                        System.out.println("2. Показать все профили (DB)");
+                        System.out.println("3. Удалить профиль (DB)");
+                        System.out.println("0. Назад");
+                        System.out.print("Выберите пункт: ");
+
+                        String adminInput = reader.readLine();
+                        if (adminInput.isEmpty()) continue;
+
+                        int adminChoice = Integer.parseInt(adminInput);
+
+                        switch (adminChoice) {
+                            case 1:
+                                System.out.print("Введите username: ");
+                                String username = reader.readLine();
+
+                                System.out.print("Введите email: ");
+                                String email = reader.readLine();
+
+                                dao.addProfile(username, email);
+                                System.out.println("Профиль добавлен в БД\n");
+                                break;
+
+                            case 2:
+                                dao.getProfiles();
+                                System.out.println();
+                                break;
+
+                            case 3:
+                                System.out.print("Введите ID профиля для удаления: ");
+                                int id = Integer.parseInt(reader.readLine());
+
+                                dao.deleteProfile(id);
+                                System.out.println("Профиль удалён из БД\n");
+                                break;
+
+                            case 0:
+                                adminRun = false;
+                                System.out.println("Возврат в главное меню\n");
+                                break;
+
+                            default:
+                                System.out.println("Неверный выбор\n");
+                        }
+                    }
+                    break;
+
 
                 default:
                     System.out.println("Неверный выбор\n");
