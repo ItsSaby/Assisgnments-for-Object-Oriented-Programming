@@ -49,4 +49,20 @@ public class ProfileDAO {
             e.printStackTrace();
         }
     }
+    public void updateProfile(int id, String newUsername, String newEmail) {
+        String sql = "UPDATE profiles SET username = ?, email = ? WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, newUsername);
+            ps.setString(2, newEmail);
+            ps.setInt(3, id);
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

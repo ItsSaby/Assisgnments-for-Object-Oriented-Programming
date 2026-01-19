@@ -4,9 +4,6 @@ public class Main {
     public static void main(String[] args) throws java.io.IOException {
         ProfileDAO dao = new ProfileDAO();
 
-        dao.addProfile("miras", "miras@mail.com");
-        dao.getProfiles();
-        // dao.deleteProfile(1);
 
         java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 
@@ -106,6 +103,7 @@ public class Main {
                         System.out.println("1. Добавить профиль (DB)");
                         System.out.println("2. Показать все профили (DB)");
                         System.out.println("3. Удалить профиль (DB)");
+                        System.out.println("4. Обновить данные профиля (DB)");
                         System.out.println("0. Назад");
                         System.out.print("Выберите пункт: ");
 
@@ -138,7 +136,19 @@ public class Main {
                                 dao.deleteProfile(id);
                                 System.out.println("Профиль удалён из БД\n");
                                 break;
+                            case 4:
+                                System.out.print("Введите ID профиля: ");
+                                int updId = Integer.parseInt(reader.readLine());
 
+                                System.out.print("Введите новый username: ");
+                                String newUsername = reader.readLine();
+
+                                System.out.print("Введите новый email: ");
+                                String newEmail = reader.readLine();
+
+                                dao.updateProfile(updId, newUsername, newEmail);
+                                System.out.println("Профиль обновлён\n");
+                                break;
                             case 0:
                                 adminRun = false;
                                 System.out.println("Возврат в главное меню\n");
